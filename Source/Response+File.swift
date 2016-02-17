@@ -31,7 +31,7 @@ extension Response {
             let file = try File(path: filePath, mode: .Read)
             let fileStream = FileStream(file: file)
 
-            self.init(status: status, headers: headers, stream: fileStream)
+            self.init(status: status, headers: headers, body: fileStream)
 
             if let
                 fileExtension = file.fileExtension,
