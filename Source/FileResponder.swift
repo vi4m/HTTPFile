@@ -42,7 +42,7 @@ public struct FileResponder: ResponderType {
 
         var path = requestPath
 
-        if path.hasSuffix("/") {
+        if path.endsWith("/") {
             path += "index.html"
         }
 
