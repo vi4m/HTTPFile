@@ -25,10 +25,10 @@
 @_exported import HTTP
 
 public struct FileResponder: ResponderType {
-    let basePath: String
+    let path: String
 
-    public init(basePath: String) {
-        self.basePath = basePath
+    public init(path: String) {
+        self.path = path
     }
 
     public func respond(request: Request) throws -> Response {
@@ -46,6 +46,6 @@ public struct FileResponder: ResponderType {
             path += "index.html"
         }
 
-        return Response(status: .OK, filePath: basePath + path)
+        return Response(status: .OK, filePath: self.path + path)
     }
 }
