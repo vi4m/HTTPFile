@@ -22,9 +22,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@_exported import File
 @_exported import HTTP
 
-public struct FileResponder: ResponderType {
+public struct FileResponder: Responder {
     let path: String
 
     public init(path: String) {
@@ -32,12 +33,12 @@ public struct FileResponder: ResponderType {
     }
 
     public func respond(request: Request) throws -> Response {
-        if request.method != .GET {
-            return Response(status: .MethodNotAllowed)
+        if request.method != .get {
+            return Response(status: .methodNotAllowed)
         }
 
         guard let requestPath = request.path else {
-            return Response(status: .InternalServerError)
+            return Response(status: .internalServerError)
         }
 
         var path = requestPath
@@ -46,6 +47,6 @@ public struct FileResponder: ResponderType {
             path += "index.html"
         }
 
-        return Response(status: .OK, filePath: self.path + path)
+        return Response(status: .ok, filePath: self.path + path)
     }
 }

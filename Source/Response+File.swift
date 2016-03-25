@@ -22,13 +22,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-@_exported import File
-@_exported import HTTP
-
 extension Response {
     public init(status: Status, headers: Headers = [:], filePath: String) {
         do {
-            let file = try File(path: filePath, mode: .Read)
+            let file = try File(path: filePath, mode: .read)
             let fileStream = FileStream(file: file)
 
             self.init(status: status, headers: headers, body: fileStream)
@@ -40,7 +37,7 @@ extension Response {
             }
 
         } catch {
-            self.init(status: .NotFound)
+            self.init(status: .notFound)
         }
     }
 }
