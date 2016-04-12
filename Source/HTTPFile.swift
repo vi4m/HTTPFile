@@ -32,7 +32,7 @@ public struct FileResponder: Responder {
         self.path = path
     }
 
-    public func respond(request: Request) throws -> Response {
+    public func respond(to request: Request) throws -> Response {
         if request.method != .get {
             return Response(status: .methodNotAllowed)
         }
@@ -55,9 +55,7 @@ extension Response {
     public init(status: Status = .ok, headers: Headers = [:], filePath: String) {
         do {
             let file = try File(path: filePath, mode: .read)
-            let fileStream = FileStream(file: file)
-
-            self.init(status: status, headers: headers, body: fileStream)
+            self.init(status: status, headers: headers, body: file)
 
             if let
                 fileExtension = file.fileExtension,
